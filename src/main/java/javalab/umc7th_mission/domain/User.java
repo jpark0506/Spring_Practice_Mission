@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javalab.umc7th_mission.domain.common.BaseEntity;
 import javalab.umc7th_mission.domain.enums.Gender;
+import javalab.umc7th_mission.domain.mapping.UserFoodCategory;
 import javalab.umc7th_mission.domain.mapping.UserMission;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -55,7 +56,7 @@ public class User extends BaseEntity {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<FoodCategory> foodCategories;
+    private List<UserFoodCategory> foodCategories;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserMission> userMissions;

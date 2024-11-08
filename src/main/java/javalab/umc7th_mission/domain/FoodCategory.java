@@ -22,7 +22,4 @@ public class FoodCategory extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String category;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "userId", nullable = false)
-    private User user;
 }
