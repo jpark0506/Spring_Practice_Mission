@@ -11,7 +11,7 @@ import javalab.umc7th_mission.validation.validator.MissionChallengingValidator;
 
 @Documented
 @Constraint(validatedBy = MissionChallengingValidator.class)
-@Target( {ElementType.TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER })
+@Target( {ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface IsChallenging {
     String message() default "이미 유저가 미션을 도전하고 있습니다.";

@@ -1,6 +1,6 @@
 package javalab.umc7th_mission.controller;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 import javalab.umc7th_mission.dto.usermission.UserMissionRequestDTO;
 import javalab.umc7th_mission.global.ApiResponse;

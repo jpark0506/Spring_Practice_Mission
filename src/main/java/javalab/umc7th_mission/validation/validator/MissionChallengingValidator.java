@@ -6,9 +6,10 @@ import javalab.umc7th_mission.domain.enums.MissionStatus;
 import javalab.umc7th_mission.dto.usermission.UserMissionRequestDTO;
 import javalab.umc7th_mission.global.code.ErrorStatus;
 import javalab.umc7th_mission.repository.UserMissionRepository;
-import javalab.umc7th_mission.validation.annotation.ExistCategories;
 import javalab.umc7th_mission.validation.annotation.IsChallenging;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -23,21 +24,13 @@ public class MissionChallengingValidator implements
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(MissionChallengingValidator.class);
+
     @Override
     public boolean isValid(UserMissionRequestDTO userMissionRequestDTO, ConstraintValidatorContext context) {
 
-        if(userMissionRequestDTO.missionId() == null){
-            context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("미션 Id는 빈칸일 수 없습니다.")
-                .addConstraintViolation();
-            return false;
-        }
-        if(userMissionRequestDTO.userId() == null){
-            context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("유저 Id는 빈칸일 수 없습니다.")
-                .addConstraintViolation();
-            return false;
-        }
+        logger.info("Validating MissionChallenge: missionId={}, userId={}",
+            userMissionRequestDTO.missionId(), userMissionRequestDTO.userId());
 
         boolean exist = userMissionRepository.existsUserMissionByMissionIdAndUserIdAndMissionStatus(
             userMissionRequestDTO.missionId(), userMissionRequestDTO.userId(), MissionStatus.CHALLENGING

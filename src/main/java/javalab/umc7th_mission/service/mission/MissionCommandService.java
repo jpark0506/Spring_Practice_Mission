@@ -27,6 +27,9 @@ public class MissionCommandService {
 
     public Integer challengeMission(UserMissionRequestDTO userMissionRequestDTO){
 
+        log.info("Processing MissionChallengeRequest in Service: userId={}, missionId={}",
+            userMissionRequestDTO.userId(), userMissionRequestDTO.missionId());
+
         User user = userRepository.findById(userMissionRequestDTO.userId()).orElseThrow(
             () -> new GeneralException(ErrorStatus.USER_NOT_FOUND)
         );
