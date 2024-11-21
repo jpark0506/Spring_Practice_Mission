@@ -34,4 +34,8 @@ public class Store extends BaseEntity {
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Mission> missions;
+
+    public void changeRegion(Region region) {
+        this.region = region;
+    }
 }

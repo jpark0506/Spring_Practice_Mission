@@ -1,6 +1,7 @@
 package javalab.umc7th_mission.domain;
 
 import jakarta.persistence.*;
+import java.util.List;
 import javalab.umc7th_mission.domain.common.BaseEntity;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,4 +22,11 @@ public class Region extends BaseEntity {
 
     @Column(nullable = false, length = 50)
     private String name;
+
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Store> stores;
+
+    public void changeName(String name) {
+        this.name = name;
+    }
 }

@@ -27,7 +27,7 @@ public record UserRequestDTO(
     @Size(min = 13, max = 13)
     String phoneNumber,
     @ExistCategories
-    List<Long> preferCategory
+    List<Integer> preferCategory
 ) {
 
 }
