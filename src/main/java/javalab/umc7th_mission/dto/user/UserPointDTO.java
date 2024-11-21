@@ -1,4 +1,4 @@
-package javalab.umc7th_mission.dto;
+package javalab.umc7th_mission.dto.user;
 
 public record UserPointDTO(
     Long userId,
