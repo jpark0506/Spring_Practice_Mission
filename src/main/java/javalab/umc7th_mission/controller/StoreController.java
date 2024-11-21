@@ -1,12 +1,11 @@
 package javalab.umc7th_mission.controller;
 
-import javalab.umc7th_mission.domain.Review;
+import jakarta.validation.Valid;
+import javalab.umc7th_mission.dto.mission.MissionRequestDTO;
 import javalab.umc7th_mission.dto.review.ReviewRequestDTO;
 import javalab.umc7th_mission.global.ApiResponse;
 import javalab.umc7th_mission.service.store.StoreCommandService;
-import javalab.umc7th_mission.validation.annotation.ExistCategories;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +20,17 @@ public class StoreController {
 
     @PostMapping("/review")
     public ApiResponse<Integer> addStoreReview(
-        @RequestBody ReviewRequestDTO reviewRequestDTO) {
+        @RequestBody @Valid ReviewRequestDTO reviewRequestDTO) {
             return ApiResponse.onSuccess(storeCommandService.addStoreReview(
                 reviewRequestDTO
             ));
+    }
+
+    @PostMapping("/mission")
+    public ApiResponse<Integer> addStoreMission(
+        @RequestBody @Valid MissionRequestDTO missionRequestDTO) {
+        return ApiResponse.onSuccess(storeCommandService.addStoreMission(
+            missionRequestDTO
+        ));
     }
 }

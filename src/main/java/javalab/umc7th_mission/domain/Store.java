@@ -38,4 +38,8 @@ public class Store extends BaseEntity {
     public void changeRegion(Region region) {
         this.region = region;
     }
+
+    public void addMission(Mission mission) {
+        this.missions.add(mission);
+    }
 }
