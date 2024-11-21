@@ -2,8 +2,8 @@ package javalab.umc7th_mission.service.user;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import javalab.umc7th_mission.converter.UserConverter;
-import javalab.umc7th_mission.converter.UserFoodCategoryConverter;
+import javalab.umc7th_mission.converter.user.UserConverter;
+import javalab.umc7th_mission.converter.user.UserFoodCategoryConverter;
 import javalab.umc7th_mission.domain.FoodCategory;
 import javalab.umc7th_mission.domain.User;
 import javalab.umc7th_mission.domain.mapping.UserFoodCategory;
@@ -11,7 +11,6 @@ import javalab.umc7th_mission.dto.user.UserRequestDTO;
 import javalab.umc7th_mission.dto.user.UserResponseDTO;
 import javalab.umc7th_mission.global.code.ErrorStatus;
 import javalab.umc7th_mission.global.exception.GeneralException;
-import javalab.umc7th_mission.global.exception.handler.FoodCategoryHandler;
 import javalab.umc7th_mission.repository.FoodCategoryRepository;
 import javalab.umc7th_mission.repository.UserFoodCategoryRepository;
 import javalab.umc7th_mission.repository.UserRepository;

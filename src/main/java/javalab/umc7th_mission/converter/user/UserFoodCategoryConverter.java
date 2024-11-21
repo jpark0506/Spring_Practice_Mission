@@ -1,4 +1,4 @@
-package javalab.umc7th_mission.converter;
+package javalab.umc7th_mission.converter.user;
 
 import java.util.List;
 import java.util.stream.Collectors;

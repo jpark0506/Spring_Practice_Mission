@@ -1,6 +1,5 @@
-package javalab.umc7th_mission.converter;
+package javalab.umc7th_mission.converter.user;
 
-import java.time.LocalDateTime;
 import javalab.umc7th_mission.domain.User;
 import javalab.umc7th_mission.domain.enums.Gender;
 import javalab.umc7th_mission.dto.user.UserRequestDTO;
