@@ -5,7 +5,7 @@ import javalab.umc7th_mission.converter.review.ReviewConverter;
 import javalab.umc7th_mission.domain.Mission;
 import javalab.umc7th_mission.domain.Review;
 import javalab.umc7th_mission.domain.Store;
-import javalab.umc7th_mission.dto.mission.MissionRequestDTO;
+import javalab.umc7th_mission.dto.mission.MissionCreateDTO;
 import javalab.umc7th_mission.dto.review.ReviewRequestDTO;
 import javalab.umc7th_mission.global.code.ErrorStatus;
 import javalab.umc7th_mission.global.exception.GeneralException;
@@ -42,12 +42,12 @@ public class StoreCommandService {
         return review.getId();
     }
 
-    public Integer addStoreMission(MissionRequestDTO missionRequestDTO){
-        Store store = storeRepository.findById(missionRequestDTO.storeId()).orElseThrow(
+    public Integer addStoreMission(MissionCreateDTO missionCreateDTO){
+        Store store = storeRepository.findById(missionCreateDTO.storeId()).orElseThrow(
             () -> new GeneralException(ErrorStatus.STORE_NOT_FOUND)
         );
         Mission mission = MissionConverter.toMission(
-            missionRequestDTO,
+            missionCreateDTO,
             store
         );
 

@@ -1,6 +1,7 @@
 package javalab.umc7th_mission.domain.mapping;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import javalab.umc7th_mission.domain.Mission;
 import javalab.umc7th_mission.domain.User;
 import javalab.umc7th_mission.domain.common.BaseEntity;
@@ -25,11 +26,11 @@ public class UserMission extends BaseEntity {
     private Integer id;
 
     @Column(nullable = false)
-    private Date startTime;
+    private LocalDateTime startTime;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private MissionStatus missionStatus = MissionStatus.STARTED;
+    private MissionStatus missionStatus = MissionStatus.CHALLENGING;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)

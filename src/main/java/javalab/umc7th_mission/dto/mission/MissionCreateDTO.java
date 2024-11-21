@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import java.util.Date;
 import javalab.umc7th_mission.validation.annotation.ExistStore;
 
-public record MissionRequestDTO(
+public record MissionCreateDTO(
     @Size(min = 1, max = 50)
     String content,
     @Size(min=1000, max=5000)

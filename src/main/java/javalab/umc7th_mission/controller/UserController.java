@@ -20,7 +20,7 @@ public class UserController {
 
     @PostMapping("/")
     public ApiResponse<UserResponseDTO> join(
-        @RequestBody @Valid UserRequestDTO userRequestDTO){
+        @Valid @RequestBody UserRequestDTO userRequestDTO){
         return ApiResponse.onSuccess(
             userCommandService.joinUser(userRequestDTO)
         );

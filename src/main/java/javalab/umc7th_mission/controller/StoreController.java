@@ -1,7 +1,7 @@
 package javalab.umc7th_mission.controller;
 
 import jakarta.validation.Valid;
-import javalab.umc7th_mission.dto.mission.MissionRequestDTO;
+import javalab.umc7th_mission.dto.mission.MissionCreateDTO;
 import javalab.umc7th_mission.dto.review.ReviewRequestDTO;
 import javalab.umc7th_mission.global.ApiResponse;
 import javalab.umc7th_mission.service.store.StoreCommandService;
@@ -20,7 +20,7 @@ public class StoreController {
 
     @PostMapping("/review")
     public ApiResponse<Integer> addStoreReview(
-        @RequestBody @Valid ReviewRequestDTO reviewRequestDTO) {
+        @Valid @RequestBody  ReviewRequestDTO reviewRequestDTO) {
             return ApiResponse.onSuccess(storeCommandService.addStoreReview(
                 reviewRequestDTO
             ));
@@ -28,9 +28,9 @@ public class StoreController {
 
     @PostMapping("/mission")
     public ApiResponse<Integer> addStoreMission(
-        @RequestBody @Valid MissionRequestDTO missionRequestDTO) {
+        @Valid @RequestBody MissionCreateDTO missionCreateDTO) {
         return ApiResponse.onSuccess(storeCommandService.addStoreMission(
-            missionRequestDTO
+            missionCreateDTO
         ));
     }
 }
