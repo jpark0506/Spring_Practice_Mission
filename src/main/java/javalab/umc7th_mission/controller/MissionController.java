@@ -29,18 +29,29 @@ public class MissionController {
 
     @PostMapping("/challenge")
     public ApiResponse<Integer> challengeMission(
-        @Valid @RequestBody UserMissionRequestDTO userMissionRequestDTO){
+        @Valid @RequestBody UserMissionRequestDTO userMissionRequestDTO) {
         return ApiResponse.onSuccess(
             missionCommandService.challengeMission(userMissionRequestDTO)
         );
     }
 
-    @GetMapping("/{storeId}")
+    @GetMapping("/list/challenge/{userId}")
+    public ApiResponse<PageResponseDTO<MissionListResponseDTO>> challengeMissionList(
+        @CheckPage @RequestParam Integer page,
+        @PathVariable Integer userId
+    ) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return ApiResponse.onSuccess(missionQueryService.getChallengingMissionListByUserId(
+            userId, pageable
+        ));
+    }
+
+    @GetMapping("/list/{storeId}")
     public ApiResponse<PageResponseDTO<MissionListResponseDTO>> getMissionListByStoreId(
         @CheckPage @RequestParam Integer page,
         @PathVariable Integer storeId
-    ){
-        Pageable pageable = PageRequest.of(page,10);
+    ) {
+        Pageable pageable = PageRequest.of(page, 10);
         return ApiResponse.onSuccess(missionQueryService.getMissionByStoreId(
             storeId, pageable
         ));
