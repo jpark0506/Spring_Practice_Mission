@@ -3,6 +3,7 @@ package javalab.umc7th_mission.service.mission;
 import javalab.umc7th_mission.converter.usermission.UserMissionConverter;
 import javalab.umc7th_mission.domain.Mission;
 import javalab.umc7th_mission.domain.User;
+import javalab.umc7th_mission.domain.enums.MissionStatus;
 import javalab.umc7th_mission.domain.mapping.UserMission;
 import javalab.umc7th_mission.dto.usermission.UserMissionRequestDTO;
 import javalab.umc7th_mission.global.code.ErrorStatus;
@@ -27,9 +28,6 @@ public class MissionCommandService {
 
     public Integer challengeMission(UserMissionRequestDTO userMissionRequestDTO){
 
-        log.info("Processing MissionChallengeRequest in Service: userId={}, missionId={}",
-            userMissionRequestDTO.userId(), userMissionRequestDTO.missionId());
-
         User user = userRepository.findById(userMissionRequestDTO.userId()).orElseThrow(
             () -> new GeneralException(ErrorStatus.USER_NOT_FOUND)
         );
@@ -45,5 +43,29 @@ public class MissionCommandService {
         user.addUserMission(userMission);
 
         return userMission.getId();
+    }
+
+    public void completeMission(Integer missionId, Integer userId){
+
+        User user = userRepository.findById(userId).orElseThrow(
+            () -> new GeneralException(ErrorStatus.USER_NOT_FOUND)
+        );
+
+        Mission mission = missionRepository.findById(missionId).orElseThrow(
+            () ->  new GeneralException(ErrorStatus.MISSION_NOT_FOUND)
+        );
+
+        UserMission userMission = userMissionRepository.findByMissionAndUser(
+            mission, user
+        ).orElseThrow(
+            () -> new GeneralException(ErrorStatus.USER_NOT_CHALLENGING_MISSION)
+        );
+
+        if(!userMission.getMissionStatus().equals(MissionStatus.CHALLENGING)){
+            throw new GeneralException(ErrorStatus.USER_NOT_CHALLENGING_MISSION);
+        }
+
+        userMission.changeMissionStatus(MissionStatus.COMPLETED);
+
     }
 }

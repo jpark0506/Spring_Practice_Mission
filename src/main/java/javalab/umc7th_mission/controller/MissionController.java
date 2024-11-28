@@ -7,6 +7,7 @@ import javalab.umc7th_mission.validation.annotation.CheckPage;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
@@ -32,6 +33,17 @@ public class MissionController {
         @Valid @RequestBody UserMissionRequestDTO userMissionRequestDTO) {
         return ApiResponse.onSuccess(
             missionCommandService.challengeMission(userMissionRequestDTO)
+        );
+    }
+
+    @PatchMapping("/complete/{missionId}/user/{userId}")
+    public ApiResponse<Boolean> completeMission(
+        @PathVariable Integer missionId,
+        @PathVariable Integer userId
+    ){
+        missionCommandService.completeMission(missionId,userId);
+        return ApiResponse.onSuccess(
+            true
         );
     }
 

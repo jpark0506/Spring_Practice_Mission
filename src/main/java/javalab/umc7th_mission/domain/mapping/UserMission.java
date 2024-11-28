@@ -40,4 +40,7 @@ public class UserMission extends BaseEntity {
     @JoinColumn(name = "missionId", nullable = false)
     private Mission mission;
 
+    public void changeMissionStatus(MissionStatus missionStatus){
+        this.missionStatus = missionStatus;
+    }
 }
