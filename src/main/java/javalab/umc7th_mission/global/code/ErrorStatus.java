@@ -38,8 +38,12 @@ public enum ErrorStatus implements BaseErrorCode {
 
     //
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER4001", "유저가 존재하지 않습니다"),
+
+    //
+    PAGE_NOT_VALID(HttpStatus.BAD_REQUEST, "PAGE4001", "페이지 번호가 적절하지 않습니다"),
     // 예시,,,
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다.");
+
 
 
     private final HttpStatus httpStatus;
