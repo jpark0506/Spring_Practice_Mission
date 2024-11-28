@@ -52,7 +52,7 @@ public class MissionController {
         @CheckPage @RequestParam Integer page,
         @PathVariable Integer userId
     ) {
-        Pageable pageable = PageRequest.of(page, 10);
+        Pageable pageable = PageRequest.of(page-1, 10);
         return ApiResponse.onSuccess(missionQueryService.getChallengingMissionListByUserId(
             userId, pageable
         ));
@@ -63,7 +63,7 @@ public class MissionController {
         @CheckPage @RequestParam Integer page,
         @PathVariable Integer storeId
     ) {
-        Pageable pageable = PageRequest.of(page, 10);
+        Pageable pageable = PageRequest.of(page-1, 10);
         return ApiResponse.onSuccess(missionQueryService.getMissionByStoreId(
             storeId, pageable
         ));

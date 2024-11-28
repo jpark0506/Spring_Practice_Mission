@@ -47,7 +47,7 @@ public class MissionQueryService {
             .toList();
 
         return new PageResponseDTO<>(
-            missionPage.getTotalPages(),
+            pageable.getPageNumber(),
             missionPage.hasNext(),
             MissionConverter.toMissionListResponseDTO(missionResponseDTOList)
         );
@@ -69,7 +69,7 @@ public class MissionQueryService {
             .toList();
 
         return new PageResponseDTO<>(
-            userMissionPage.getTotalPages(),
+            pageable.getPageNumber(),
             userMissionPage.hasNext(),
             MissionConverter.toMissionListResponseDTO(missionList)
         );

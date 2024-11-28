@@ -25,7 +25,7 @@ public class ReviewController {
     public ApiResponse<PageResponseDTO<ReviewListResponseDTO>> getReviewList(
         @CheckPage @RequestParam(name = "page") Integer page,
         @PathVariable Integer userId) {
-        Pageable pageable = PageRequest.of(page, 10);
+        Pageable pageable = PageRequest.of(page-1, 10);
 
         return ApiResponse.onSuccess(
             reviewQueryService.getReviewWithUserID(userId, pageable));

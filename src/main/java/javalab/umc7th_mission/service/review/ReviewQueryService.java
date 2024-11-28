@@ -41,7 +41,7 @@ public class ReviewQueryService {
             .toList();
 
         return new PageResponseDTO<>(
-            reviewList.getTotalPages(),
+            pageable.getPageNumber(),
             reviewList.hasNext(),
             ReviewConverter.toReviewListResponseDTO(reviewListResponseDTO)
         );
