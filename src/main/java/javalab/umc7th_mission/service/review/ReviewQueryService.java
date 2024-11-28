@@ -1,11 +1,13 @@
 package javalab.umc7th_mission.service.review;
 
+import java.util.ArrayList;
 import java.util.List;
 import javalab.umc7th_mission.converter.review.ReviewConverter;
 import javalab.umc7th_mission.domain.Review;
 import javalab.umc7th_mission.domain.User;
 import javalab.umc7th_mission.dto.review.ReviewListResponseDTO;
 import javalab.umc7th_mission.dto.review.ReviewResponseDTO;
+import javalab.umc7th_mission.global.PageResponseDTO;
 import javalab.umc7th_mission.global.code.ErrorStatus;
 import javalab.umc7th_mission.global.exception.GeneralException;
 import javalab.umc7th_mission.repository.ReviewRepository;
@@ -26,7 +28,7 @@ public class ReviewQueryService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
 
-    public ReviewListResponseDTO getReviewWithUserID(Integer userId, Pageable pageable) {
+    public PageResponseDTO<ReviewListResponseDTO> getReviewWithUserID(Integer userId, Pageable pageable) {
 
         User user = userRepository.findById(userId).orElseThrow(
             () -> new GeneralException(ErrorStatus.USER_NOT_FOUND)
@@ -38,8 +40,10 @@ public class ReviewQueryService {
             .map(ReviewConverter::toReviewResponseDTO)
             .toList();
 
-        return ReviewConverter.toReviewListResponseDTO(
-            reviewListResponseDTO
+        return new PageResponseDTO<>(
+            reviewList.getTotalPages(),
+            reviewList.hasNext(),
+            ReviewConverter.toReviewListResponseDTO(reviewListResponseDTO)
         );
     }
 }

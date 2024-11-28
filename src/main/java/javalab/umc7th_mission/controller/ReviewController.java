@@ -1,6 +1,8 @@
 package javalab.umc7th_mission.controller;
 
 import javalab.umc7th_mission.dto.review.ReviewListResponseDTO;
+import javalab.umc7th_mission.global.ApiResponse;
+import javalab.umc7th_mission.global.PageResponseDTO;
 import javalab.umc7th_mission.service.review.ReviewQueryService;
 import javalab.umc7th_mission.validation.annotation.CheckPage;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +22,12 @@ public class ReviewController {
     private final ReviewQueryService reviewQueryService;
 
     @GetMapping("/{userId}")
-    public ReviewListResponseDTO getReviewList(
+    public ApiResponse<PageResponseDTO<ReviewListResponseDTO>> getReviewList(
         @CheckPage @RequestParam(name = "page") Integer page,
         @PathVariable Integer userId) {
         Pageable pageable = PageRequest.of(page, 10);
 
-        return reviewQueryService.getReviewWithUserID(userId, pageable);
+        return ApiResponse.onSuccess(
+            reviewQueryService.getReviewWithUserID(userId, pageable));
     }
 }
