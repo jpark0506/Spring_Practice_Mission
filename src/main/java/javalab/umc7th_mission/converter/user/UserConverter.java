@@ -16,7 +16,7 @@ public class UserConverter {
     public static User toUser(UserRequestDTO userRequestDTO){
         Gender gender = null;
 
-        switch (userRequestDTO.gender()){
+        switch (userRequestDTO.getGender()){
             case 1:
                 gender = Gender.MALE;
                 break;
@@ -28,13 +28,15 @@ public class UserConverter {
                 break;
         }
         return User.builder()
-            .name(userRequestDTO.name())
+            .name(userRequestDTO.getName())
             .gender(gender)
-            .email(userRequestDTO.email())
-            .address(userRequestDTO.address())
-            .birthDate(userRequestDTO.birthDate())
-            .phoneNumber(userRequestDTO.phoneNumber())
-            .nickname(userRequestDTO.nickname())
+            .email(userRequestDTO.getEmail())
+            .password(userRequestDTO.getPassword())
+            .role(userRequestDTO.getRole())
+            .address(userRequestDTO.getAddress())
+            .birthDate(userRequestDTO.getBirthDate())
+            .phoneNumber(userRequestDTO.getPhoneNumber())
+            .nickname(userRequestDTO.getNickname())
             .build();
     }
 }

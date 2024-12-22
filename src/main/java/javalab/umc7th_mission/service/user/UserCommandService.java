@@ -16,6 +16,7 @@ import javalab.umc7th_mission.repository.UserFoodCategoryRepository;
 import javalab.umc7th_mission.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,9 +32,15 @@ public class UserCommandService {
 
     private final UserFoodCategoryRepository userFoodCategoryRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     public UserResponseDTO joinUser(UserRequestDTO requestDTO) {
+
+        log.info(requestDTO.toString());
         User newUser = UserConverter.toUser(requestDTO);
-        List<FoodCategory> foodCategoryList = requestDTO.preferCategory().stream()
+
+        newUser.encodePassword(passwordEncoder.encode(requestDTO.getPassword()));
+        List<FoodCategory> foodCategoryList = requestDTO.getPreferCategory().stream()
             .map(category -> {
                 // 어차피 Optional인데 굳이 Validation을 앞에서..?
                 // Repo 접근하는 것도 똑같은데 사실 Annotation을 써서 Validation을 앞단에서 해야하나 싶음.

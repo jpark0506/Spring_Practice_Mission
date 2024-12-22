@@ -2,6 +2,7 @@ package javalab.umc7th_mission.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javalab.umc7th_mission.domain.common.BaseEntity;
 import javalab.umc7th_mission.domain.enums.Gender;
+import javalab.umc7th_mission.domain.enums.Role;
 import javalab.umc7th_mission.domain.mapping.UserFoodCategory;
 import javalab.umc7th_mission.domain.mapping.UserMission;
 import lombok.AccessLevel;
@@ -51,8 +53,15 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String nickname;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
     @Column(nullable = false, length = 13)
     private String phoneNumber;
@@ -68,6 +77,10 @@ public class User extends BaseEntity {
 
     public void addUserMission(UserMission userMission) {
         userMissions.add(userMission);
+    }
+
+    public void encodePassword(String password) {
+        this.password = password;
     }
 
 }

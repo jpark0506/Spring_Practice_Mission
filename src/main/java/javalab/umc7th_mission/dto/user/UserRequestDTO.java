@@ -1,33 +1,52 @@
 package javalab.umc7th_mission.dto.user;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
+import javalab.umc7th_mission.domain.enums.Role;
 import javalab.umc7th_mission.validation.annotation.ExistCategories;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record UserRequestDTO(
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class UserRequestDTO {
+
     @NotBlank
-    String name,
+    private String name;
+
     @NotNull
-    Integer gender,
+    private Integer gender;
+
     @NotNull
-    Date birthDate,
+    private Date birthDate;
+
     @NotBlank
     @Size(min = 5, max = 12)
-    String address,
+    private String address;
+
     @NotBlank
     @Size(min = 5, max = 12)
-    String nickname,
-    @NotEmpty
-    String email,
+    private String nickname;
+
+    @NotBlank
+    @Email
+    private String email;
+
+    @NotBlank
+    private String password;
+
+    @NotNull
+    private Role role;
+
     @NotEmpty
     @Size(min = 13, max = 13)
-    String phoneNumber,
-    @ExistCategories
-    List<Integer> preferCategory
-) {
+    private String phoneNumber;
 
+    @ExistCategories
+    private List<Integer> preferCategory;
 }
